@@ -1,4 +1,6 @@
 import 'package:emart/consts/consts.dart';
+import 'package:emart/controllers/auth_controller.dart';
+import 'package:emart/views/home_screen/home.dart';
 import 'package:emart/widgets_common/applogo_widget.dart';
 import 'package:emart/widgets_common/bg_widget.dart';
 import 'package:emart/widgets_common/custom_textfield.dart';
@@ -13,9 +15,14 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  TextEditingController nameField = TextEditingController();
+  TextEditingController emailField = TextEditingController();
+  TextEditingController passField = TextEditingController();
+
   bool? isCheck = false;
   @override
   Widget build(BuildContext context) {
+    var authController = Get.find<AuthController>();
     return bgWidget(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -29,10 +36,12 @@ class _SignupScreenState extends State<SignupScreen> {
             15.heightBox,
             Column(
               children: [
-                customTextField(hint: namehint, title: name),
-                customTextField(hint: emailHint, title: email),
-                customTextField(hint: passwordHint, title: password),
-                customTextField(hint: passwordHint, title: retypePass),
+                customTextField(
+                    hint: namehint, title: name, controller: nameField),
+                customTextField(
+                    hint: emailHint, title: email, controller: emailField),
+                customTextField(
+                    hint: passwordHint, title: password, controller: passField),
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
@@ -85,13 +94,23 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 5.heightBox,
                 ourButton(
-                        color: isCheck == true ? redColor : lightGrey,
-                        label: signup,
-                        textColor: whiteColor,
-                        onPress: () {})
-                    .box
-                    .width(context.screenWidth - 50)
-                    .make(),
+                    color: isCheck == true ? redColor : lightGrey,
+                    label: signup,
+                    textColor: whiteColor,
+                    onPress: () async {
+                      await authController
+                          .userSignUp(
+                              email: emailField.text, pass: passField.text)
+                          .then((value) async {
+                        if (value != null) {
+                          await authController.storeUserData(
+                              email: emailField.text,
+                              pass: passField.text,
+                              name: nameField.text);
+                          Get.offAll(() => Home());
+                        }
+                      });
+                    }).box.width(context.screenWidth - 50).make(),
                 10.heightBox,
                 RichText(
                   text: const TextSpan(

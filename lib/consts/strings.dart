@@ -1,10 +1,10 @@
 const appname = "eMart";
 const appversion = "Version 1.0.0";
-const credits = "@AJ Devs";
+const credits = "Aswin Dlvpr";
 const name = "Name";
-const namehint = "Apurv Jagtap";
+const namehint = "Ashwin Yadav";
 const email = "Email";
-const emailHint = "apurvjagtap@gmail.com";
+const emailHint = "iamashwinyadav@gmail.com";
 const password = "Password";
 const passwordHint = "********";
 const retypePass = "Retype Password";

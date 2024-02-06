@@ -71,7 +71,7 @@ flutter:
     - family: sans_regular
       fonts:
         - asset: assets/fonts/sans_Regular.ttf
-    
+
     - family: sans_bold
       fonts:
         - asset: assets/fonts/sans_bold.ttf
@@ -79,7 +79,5 @@ flutter:
     - family: sans_semibold
       fonts:
         - asset: assets/fonts/sans_semibold.ttf
- 
- 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
