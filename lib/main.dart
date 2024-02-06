@@ -1,9 +1,14 @@
 import 'package:emart/consts/consts.dart';
+import 'package:emart/firebase_options.dart';
 import 'package:emart/views/splash_screen/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'package:get/get.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(const MyApp());
 }
 
